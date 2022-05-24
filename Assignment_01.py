@@ -1,26 +1,24 @@
 class hashTable:
-    # initialize hash Table
+    
     def __init__(self):
         self.size = int(input("Enter the Size of the hash table : "))
-        # initialize table with all elements 0
+     
         self.table = list(0 for i in range(self.size))
         self.elementCount = 0
         self.comparisons = 0
 
-    # method that checks if the hash table is full or not
+ 
     def isFull(self):
         if self.elementCount == self.size:
             return True
         else:
             return False
 
-    # method that returns position for a given element
     def hashFunction(self, element):
         return element % self.size
 
-    # method that inserts element inside the hash table
     def insert(self, element):
-        # checking if the table is full
+      
         if self.isFull():
             print("Hash Table Full")
             return False
@@ -29,14 +27,14 @@ class hashTable:
 
         position = self.hashFunction(element)
 
-        # checking if the position is empty
+       
         if self.table[position] == 0:
             self.table[position] = element
             print("Element " + str(element) + " at position " + str(position))
             isStored = True
             self.elementCount += 1
 
-        # collision occured hence we do linear probing
+       
         else:
             print("Collision has occured for element " + str(element) + " at position " + str(
                 position) + " finding new Position.")
@@ -50,9 +48,6 @@ class hashTable:
             self.elementCount += 1
         return isStored
 
-    # method that searches for an element in the table
-    # returns position of element if found
-    # else returns False
     def search(self, element):
         found = False
 
@@ -63,12 +58,10 @@ class hashTable:
             return position
             isFound = True
 
-        # if element is not found at position returned hash function
-        # then first we search element from position+1 to end
-        # if not found then we search element from position-1 to 0
+    
         else:
             temp = position - 1
-            # check if the element is stored between position+1 to size
+            
             while position < self.size:
                 if self.table[position] != element:
                     position += 1
@@ -76,7 +69,7 @@ class hashTable:
                 else:
                     return position
 
-            # now checking if the element is stored between position-1 to 0
+           
             position = temp
             while position >= 0:
                 if self.table[position] != element:
@@ -89,7 +82,7 @@ class hashTable:
             print("Element not found")
             return False
 
-    # method to remove an element from the table
+ 
     def remove(self, element):
         position = self.search(element)
         if position is not False:
@@ -100,7 +93,7 @@ class hashTable:
             print("Element is not present in the Hash Table")
         return
 
-    # method to display the hash table
+  
     def display(self):
         print("\n")
         for i in range(self.size):
@@ -108,10 +101,9 @@ class hashTable:
         print("The number of element is the Table are : " + str(self.elementCount))
 
 
-# main function
+
 table1 = hashTable()
 
-# storing elements in table
 table1.insert(12)
 table1.insert(23)
 table1.insert(11)
@@ -120,13 +112,11 @@ table1.insert(99)
 table1.insert(9)
 table1.insert(78)
 table1.insert(40)
-table1.insert(7)  # element that causes collision at position 0
+table1.insert(7) 
 
-# displaying the Table
 table1.display()
 print()
 
-# printing position of elements
 print("The position of element 31 is : " + str(table1.search(23)))
 print("The position of element 28 is : " + str(table1.search(12)))
 print("The position of element 90 is : " + str(table1.search(99)))
